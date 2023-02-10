@@ -1,0 +1,24 @@
+[package]
+name = "datapack-compiler"
+version = "0.1.0"
+edition = "2021"
+categories = []
+description = ""
+keywords = []
+license = "MIT"
+readme = "README.md"
+repository = "https://github.com/ModProg/datapack-compiler"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+anyhow = "1.0.69"
+builder-pattern = "0.4.2"
+clap = { version = "4.1.4", features = ["derive", "wrap_help"] }
+collection_literals = "1.0.1"
+derive-where = "1.1.0"
+glob = "0.3.1"
+macro_rules_attribute = "0.1.3"
+serde = { version = "1.0.152", features = ["derive"] }
+serde_json = "1.0.93"
+serde_yaml = "0.9.17"
