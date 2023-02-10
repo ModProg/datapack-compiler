@@ -65,7 +65,7 @@ fn yaml_to_json_flattable(yaml: YamlValue) -> std::vec::IntoIter<Result<JsonValu
 }
 
 fn yaml_to_json(yaml: YamlValue) -> Result<JsonValue> {
-    Ok(match dbg!(yaml) {
+    Ok(match yaml {
         YamlValue::Sequence(seq) => seq
             .into_iter()
             .flat_map(yaml_to_json_flattable)
