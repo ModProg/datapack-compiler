@@ -1,0 +1,35 @@
+name: Build Artifacts
+
+on:
+  push:
+    branches:
+      - main
+
+concurrency:
+  group: build
+  cancel-in-progress: true
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/cache@v3
+        with:
+          path: |
+            ~/.cargo/
+            target
+          key: 1-${{ hashFiles('**/Cargo.toml') }}
+          restore-keys: |
+            1-
+      - uses: hecrj/setup-rust-action@v1
+      - name: Build
+        run: cargo build --release
+      - uses: actions/upload-artifact@v3
+        with:
+          name: datapack-compiler-${{ matrix.os }}
+          path: target/release/datapack-compiler
