@@ -23,13 +23,15 @@ jobs:
           path: |
             ~/.cargo/
             target
-          key: 1-${{ hashFiles('**/Cargo.toml') }}
+          key: ${{ matrix.os }}-${{ hashFiles('**/Cargo.toml') }}
           restore-keys: |
-            1-
+            ${{ matrix.os }}-
       - uses: hecrj/setup-rust-action@v1
       - name: Build
         run: cargo build --release
       - uses: actions/upload-artifact@v3
         with:
-          name: datapack-compiler-${{ matrix.os }}
-          path: target/release/datapack-compiler
+          name: ${{ matrix.os }}
+          path: |
+            target/release/datapack-compiler
+            target/release/datapack-compiler.exe
